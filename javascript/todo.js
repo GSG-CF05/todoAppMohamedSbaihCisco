@@ -9,7 +9,10 @@ function addTodoElement(e) {
     e.preventDefault()
     const task = todoTask.value
 
-    
+    console.log(task);
+
+    if(task !=""){
+        console.log(task);
     const taskElement = document.createElement('div')
     taskElement.classList.add('task')
 
@@ -79,7 +82,7 @@ function addTodoElement(e) {
         // saveLocalStorage(taskElement)
     })
 
-    
+}
     todoTask.value = ""
 }
 
@@ -109,16 +112,16 @@ function updateLocalStorage(todo,newTodo){
 }
 function deleteLocalStorage(todo) {
     let todos
-    // if (localStorage.getItem('todos') === null) {
-    //     todos = []
-    // } else {
+    if (localStorage.getItem('todos') === null) {
+        todos = []
+    } else {
         todos = JSON.parse(localStorage.getItem('todos'))
-        console.log("todos", todos);
+        // console.log("todos", todos);
         todos.splice(todos.indexOf(todo),1)
         localStorage.setItem('todos', JSON.stringify(todos))
-        console.log("todos", todos);
+        // console.log("todos", todos);
         
-    // }
+     }
      
        
     
@@ -167,19 +170,28 @@ function getLocalStorageOnLoad() {
 
         taskActionElement.appendChild(taskDeleteBtn)
 
-        taskEditBtn.addEventListener('click', (e) => {
-            if (taskEditBtn.textContent.toLowerCase() == 'edit') {
-                taskEditBtn.textContent = 'Save'
-                taskInputElement.removeAttribute('readonly')
-                taskInputElement.focus()
-    
-            } else {
-                taskEditBtn.textContent = "Edit"
-                saveLocalStorage(taskInputElement.value)
-                taskEditBtn.setAttribute('readonly', "readonly")
-            }
-    
-        })
+        let todo
+
+    taskEditBtn.addEventListener('click', (e) => {
+        
+        let newTodo=''
+        if (taskEditBtn.textContent.toLowerCase() == 'edit') {
+            // console.log("thisssss->"+taskInputElement.value)
+            todo=taskInputElement.value
+            taskEditBtn.textContent = 'Save'
+            taskInputElement.removeAttribute('readonly')
+            taskInputElement.focus()
+
+        } else {
+            newTodo=taskInputElement.value
+            taskEditBtn.textContent = "Edit"
+            taskEditBtn.setAttribute('readonly', "readonly")
+            // console.log("update this->"+todo)
+            updateLocalStorage(todo,newTodo)
+
+        }
+
+    })
         taskDeleteBtn.addEventListener('click', (e) => {
             todoList.removeChild(taskElement)
             deleteLocalStorage(taskInputElement.value)
