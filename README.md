@@ -28,6 +28,8 @@
 - As a user, I can still have my list even if I close the browser window
 
 ## How do I get the project on my local machine?
+- git clone https://github.com/GSG-CF05/todoAppMohamedSbaihCisco.git
+- git code .
 
 ## How we've created it?
 
