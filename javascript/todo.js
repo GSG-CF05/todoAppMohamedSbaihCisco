@@ -170,14 +170,14 @@ function getLocalStorageOnLoad() {
 
         taskActionElement.appendChild(taskDeleteBtn)
 
-        let todo
+        let pastTodo
 
     taskEditBtn.addEventListener('click', (e) => {
         
         let newTodo=''
         if (taskEditBtn.textContent.toLowerCase() == 'edit') {
             // console.log("thisssss->"+taskInputElement.value)
-            todo=taskInputElement.value
+            pastTodo=taskInputElement.value
             taskEditBtn.textContent = 'Save'
             taskInputElement.removeAttribute('readonly')
             taskInputElement.focus()
@@ -187,7 +187,7 @@ function getLocalStorageOnLoad() {
             taskEditBtn.textContent = "Edit"
             taskEditBtn.setAttribute('readonly', "readonly")
             // console.log("update this->"+todo)
-            updateLocalStorage(todo,newTodo)
+            updateLocalStorage(pastTodo,newTodo)
 
         }
 
